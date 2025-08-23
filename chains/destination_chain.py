@@ -11,7 +11,7 @@ from pinecone import Pinecone as PineconeClient
 # -----------------------------
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENV = os.getenv("PINECONE_ENV")          # e.g., "us-east1-gcp"
-INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")     # your Pinecone index
+INDEX_NAME = os.getenv("INDEX_NAME")     # your Pinecone index
 
 if not PINECONE_API_KEY or not PINECONE_ENV or not INDEX_NAME:
     raise ValueError("Please set PINECONE_API_KEY, PINECONE_ENV, and PINECONE_INDEX_NAME in your environment variables.")
