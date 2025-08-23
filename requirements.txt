@@ -11,3 +11,4 @@ python-dotenv>=1.0.0
 langchain-community>=0.0.220
 pdfminer.six>=20221105
 pi_heif>=0.2.0
+unstructured-inference>=0.8.5
