@@ -25,7 +25,7 @@ def get_pinecone_retriever():
     return LangchainPinecone(index, embedder.embed_query, "text").as_retriever()
 
 def embed_pdf_to_pinecone():
-    loader = UnstructuredPDFLoader("data/Travel-Data-for-Model-Training.pdf")
+    loader = UnstructuredPDFLoader("data/Travel-Data-for-Model-Training.pdf", strategy="fast")
     raw_documents = loader.load()
     print(f"✅ Loaded {len(raw_documents)} pages from PDF")
 
