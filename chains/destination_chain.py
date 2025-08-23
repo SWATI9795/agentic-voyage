@@ -9,18 +9,11 @@ from pinecone import Pinecone as PineconeClient
 # -----------------------------
 # Load Pinecone credentials from environment
 # -----------------------------
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_ENV = os.getenv("PINECONE_ENV")          # e.g., "us-east1-gcp"
-INDEX_NAME = os.getenv("INDEX_NAME")     # your Pinecone index
-
-if not PINECONE_API_KEY or not PINECONE_ENV or not INDEX_NAME:
-    raise ValueError("Please set PINECONE_API_KEY, PINECONE_ENV, and PINECONE_INDEX_NAME in your environment variables.")
-
 # -----------------------------
 # Initialize Pinecone client and index
 # -----------------------------
-pinecone_client = PineconeClient(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
-index = pinecone_client.index(INDEX_NAME)
+pinecone_client = PineconeClient(api_key="pcsk_7BrzjA_BrMyFwP1Y6Z8oa5zgzC293Ap6mGY9nwjngjMhA6yd5ddEcQb8rDcBce5xpT3MTZ")
+index = pinecone_client.index("travel-recommender-embeddings-index")
 
 # -----------------------------
 # Initialize Ollama embeddings
