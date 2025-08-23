@@ -1,7 +1,7 @@
 streamlit
 langchain>=0.2.0
-langchain-pinecone>=0.0.21,<1.0.0
-pinecone-client>=3.2.0,<4.0.0
+pinecone-client<2.1.0
+langchain-pinecone<0.0.21
 langchain-ollama
 sentence-transformers
 unstructured
