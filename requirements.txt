@@ -2,7 +2,6 @@ streamlit
 langchain
 langchain-community
 sentence-transformers
-pinecone==7.3.0
 pinecone-client<2.0.0
 unstructured
 tiktoken
