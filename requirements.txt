@@ -1,3 +1,4 @@
+python==3.10
 streamlit
 langchain>=0.2.0
 pinecone-client<2.1.0
