@@ -6,3 +6,4 @@ pinecone
 unstructured
 tiktoken
 ollama
+langchain-ollama
