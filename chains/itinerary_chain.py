@@ -1,35 +1,64 @@
-from langchain.chains import LLMChain
-from langchain.output_parsers import StructuredOutputParser, ResponseSchema
+import json
 from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 
-# Define the schema as a list of ResponseSchema objects
-response_schemas = [
-    ResponseSchema(name="day_1", description="Plan for Day 1"),
-    ResponseSchema(name="day_2", description="Plan for Day 2"),
-    ResponseSchema(name="day_3", description="Plan for Day 3"),
-]
+llm = ChatOllama(model="llama3.2", temperature=0.3)
 
-parser = StructuredOutputParser.from_response_schemas(response_schemas)
-
+# Prompt
 prompt = PromptTemplate(
-    input_variables=["input"],
+    input_variables=["input", "days"],
     template="""
-    You are a helpful travel planner.
+You are a helpful travel planner.
 
-    Generate a 3-day travel itinerary based on the user's preferences.
-    
-    Respond ONLY in this JSON format:
-    {{
-      "day_1": "<activities for day 1>",
-      "day_2": "<activities for day 2>",
-      "day_3": "<activities for day 3>"
-    }}
-    
-    User Query: {input}
-    """
+Generate a detailed travel itinerary for {days} days ONLY for the given destination {destinations} in the user query.
+Do NOT suggest unrelated or additional cities unless explicitly mentioned by the user.
+
+Respond ONLY in valid JSON format like this:
+{{
+  "day_1": {{
+    "activities": ["Activity 1", "Activity 2"],
+    "stay": "Suggested stay",
+    "description": "Short description of the place"
+  }},
+  "day_2": {{
+    "activities": ["Activity 1", "Activity 2"],
+    "stay": "Suggested stay",
+    "description": "Short description of the place"
+  }}
+}}
+
+User Query: {input}
+"""
 )
-itinerary_chain = LLMChain(llm=ChatOllama(model="llama3.2"), prompt=prompt, output_parser=parser)
+
+itinerary_chain = LLMChain(
+    llm=llm,
+    prompt=prompt,
+    output_parser=StrOutputParser()
+)
 
 def generate_itinerary(destinations, slots):
-    return itinerary_chain.invoke({"input": f"{destinations}, {slots}"})
+    days = slots.get("days", 3)  # default to 3
+    response = itinerary_chain.invoke(
+        {"input": f"{destinations}, {slots}", "days": days, "destinations": destinations}
+    )
+
+    # Debug print
+    #print("Raw itinerary_chain response:", response)
+
+    # Handle dict outputs (LangChain sometimes wraps in {"text": ...})
+    if isinstance(response, dict):
+        response_text = response.get("text") or response.get("output") or str(response)
+    else:
+        response_text = str(response)
+
+    # Try parsing JSON
+    try:
+        parsed = json.loads(response_text)
+        print("✅ Parsed itinerary JSON")
+        return parsed
+    except Exception as e:
+        print("⚠️ Could not parse JSON:", e)
+        return {"raw_itinerary": response_text}

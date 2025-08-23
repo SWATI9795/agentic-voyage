@@ -1,5 +1,4 @@
 import json
-
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -12,32 +11,35 @@ prompt = PromptTemplate(
     template="""
     You are a travel assistant. Classify the user's intent (destination_info / activity / budget / general)
     and extract the following fields from their query:
-    
+
     - intent (one of: destination_info, activity, budget, general)
     - destination (e.g., Goa, Udaipur)
     - budget (low / moderate / luxury or a ₹ range)
     - trip_type (e.g., honeymoon, adventure, family)
-    
+    - days (number of days mentioned, e.g., 3, 5. If not mentioned, guess based on query)
+
     Output must be valid JSON like this:
     {{
       "intent": "...",
       "destination": "...",
       "budget": "...",
-      "trip_type": "..."
+      "trip_type": "...",
+      "days": "..."
     }}
-    
+
     If any field is not clearly stated, make a best guess.
-    
+
     Respond ONLY with JSON. Do NOT include any text outside this format.
-    
-    {input}
+
+    Query: {query}
     """
 )
 
 intent_chain = prompt | llm | StrOutputParser()
 
+
 def get_intent_and_slots(query):
-    response = intent_chain.invoke({"input":query})
+    response = intent_chain.invoke({"query": query})
 
     print(f"response:", response)
 
@@ -52,6 +54,7 @@ def get_intent_and_slots(query):
             "destination": parsed.get("destination", "India"),
             "budget": parsed.get("budget", "moderate"),
             "trip_type": parsed.get("trip_type", "general"),
+            "days": parsed.get("days", "3")  # Default to 3 if missing
         }
     except json.JSONDecodeError:
         print("❌ Could not parse JSON — fallback used.")
@@ -60,5 +63,6 @@ def get_intent_and_slots(query):
             "destination": "India",
             "budget": "moderate",
             "trip_type": "general",
+            "days": "3"
         }
     return intent, slots
