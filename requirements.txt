@@ -1,8 +1,9 @@
-python==3.11.5
+python
 streamlit
-langchain>=0.2.0
-pinecone-client<2.1.0
-langchain-pinecone<0.0.21
+langchain
+pinecone
+pinecone-client
+langchain-pinecone
 langchain-ollama
 sentence-transformers
 unstructured
