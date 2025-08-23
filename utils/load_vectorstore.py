@@ -45,3 +45,5 @@ def embed_pdf_to_pinecone():
         LangchainPinecone.from_documents(batch, embedding=embedder, index_name=INDEX_NAME)
 
     print("✅ All chunks uploaded to Pinecone")
+
+embed_pdf_to_pinecone()
