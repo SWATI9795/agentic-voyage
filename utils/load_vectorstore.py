@@ -5,6 +5,7 @@ from langchain.vectorstores import Pinecone as LangchainPinecone
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import UnstructuredPDFLoader
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Load environment variables
 load_dotenv()
@@ -19,7 +20,10 @@ pinecone_client = Pinecone(api_key=PINECONE_API_KEY)
 index = pinecone_client.Index(INDEX_NAME)  # returns an index object directly
 
 # Embedder
-embedder = OllamaEmbeddings(model="mxbai-embed-large")
+#embedder = OllamaEmbeddings(model="mxbai-embed-large")
+
+embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
 
 # Retriever
 #def get_pinecone_retriever(k: int = 5):

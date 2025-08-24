@@ -3,8 +3,19 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
+from langchain_community.llms import HuggingFaceHub
 
-llm = ChatOllama(model="llama3.2", temperature=0)
+
+HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+#llm = ChatOllama(model="llama3.2", temperature=0)
+
+# Initialize LLaMA 2 Chat model
+llm = HuggingFaceHub(
+    repo_id="meta-llama/Llama-2-13b-chat-hf",   # Change to 13B if you want larger
+    huggingfacehub_api_token=HF_TOKEN,
+    model_kwargs={"temperature": 0}
+)
 
 prompt = PromptTemplate(
     input_variables=["query"],
