@@ -22,8 +22,16 @@ index = pinecone_client.Index(INDEX_NAME)  # returns an index object directly
 embedder = OllamaEmbeddings(model="mxbai-embed-large")
 
 # Retriever
+#def get_pinecone_retriever(k: int = 5):
+#    vectorstore = LangchainPinecone.from_existing_index(index=index, embedding=embedder)
+#    retriever = vectorstore.as_retriever(search_kwargs={"k": k})
+#    return retriever
+
 def get_pinecone_retriever(k: int = 5):
-    vectorstore = LangchainPinecone.from_existing_index(index=index, embedding=embedder)
+    vectorstore = LangchainPinecone.from_existing_index(
+        index_name=INDEX_NAME,
+        embedding=embedder
+    )
     retriever = vectorstore.as_retriever(search_kwargs={"k": k})
     return retriever
 
