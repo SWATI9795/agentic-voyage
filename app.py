@@ -79,6 +79,8 @@ query = st.text_input("Ask your Agentic AI Powered travel Agent about your trave
 if query:
     with st.spinner("Planning your trip..."):
         try:
+
+            print("Running Agentic Voyage app")
             # Step 1: Extract intent + slots
             intent, new_slots = get_intent_and_slots(query)
             print("Intent and slots extracted:", new_slots)
