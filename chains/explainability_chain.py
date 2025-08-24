@@ -4,11 +4,13 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_community.chat_models import ChatOllama
 from langchain_community.llms import HuggingFaceHub
+import streamlit as st
+
 
 # Initialize local LLM via Ollama (e.g., llama3)
 #llm = ChatOllama(model="llama3.2", temperature=0)
 
-HF_TOKEN = os.getenv("HFACE_API_TOKEN")
+hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 llm = HuggingFaceHub(
     repo_id="meta-llama/Llama-2-13b-chat-hf",   # Change to 13B if you want larger

@@ -2,8 +2,9 @@ from langchain.chains import RetrievalQA
 from utils.load_vectorstore import get_pinecone_retriever
 from langchain_ollama import OllamaLLM, ChatOllama
 from langchain_community.llms import HuggingFaceHub
+import streamlit as st
 
-HF_TOKEN = os.getenv("HFACE_API_TOKEN")
+hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 llm = HuggingFaceHub(
     repo_id="meta-llama/Llama-2-13b-chat-hf",   # Change to 13B if you want larger
