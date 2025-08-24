@@ -22,7 +22,7 @@ index = pinecone_client.Index(INDEX_NAME)  # returns an index object directly
 # Embedder
 #embedder = OllamaEmbeddings(model="mxbai-embed-large")
 
-embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
+embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 
 # Retriever
