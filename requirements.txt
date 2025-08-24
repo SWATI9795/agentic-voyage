@@ -11,4 +11,3 @@ python-dotenv>=1.0.0
 langchain-community>=0.0.220
 pdfminer.six>=20221105
 unstructured-inference>=0.8.5
-huggingface_hub==0.23.0
