@@ -13,10 +13,10 @@ INDEX_NAME = os.getenv("INDEX_NAME")
 PINECONE_ENV = os.getenv("PINECONE_ENV", "us-east1-gcp")
 
 # Initialize Pinecone client (v3)
-pinecone_client = Pinecone(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
+pinecone_client = Pinecone(api_key=PINECONE_API_KEY)
 
 # For v3, do NOT import Index; instead use the client to upsert/query
-index = pinecone_client.index(INDEX_NAME)  # returns an index object directly
+index = pinecone_client.Index(INDEX_NAME)  # returns an index object directly
 
 # Embedder
 embedder = OllamaEmbeddings(model="mxbai-embed-large")
