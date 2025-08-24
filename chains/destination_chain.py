@@ -9,9 +9,9 @@ from langchain_community.llms import HuggingFaceEndpoint
 #HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 llm = HuggingFaceEndpoint(
-    repo_id="meta-llama/Llama-2-13b-chat-hf",   # Change to 13B if you want larger
+    repo_id="meta-llama/Llama-2-13b-chat-hf",
     huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
-    model_kwargs={"temperature": 0}
+    temperature=0,             # pass directly here
 )
 
 retriever = get_pinecone_retriever()
