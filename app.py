@@ -80,7 +80,9 @@ if query:
     with st.spinner("Planning your trip..."):
         try:
 
-            print("Running Agentic Voyage app")
+            st.write("huggingface_hub version:", huggingface_hub.__version__)
+
+            st.write("Running Agentic Voyage app")
             # Step 1: Extract intent + slots
             intent, new_slots = get_intent_and_slots(query)
             print("Intent and slots extracted:", new_slots)
