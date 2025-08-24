@@ -7,7 +7,7 @@ from langchain_community.llms import HuggingFaceHub
 
 #llm = ChatOllama(model="llama3.2", temperature=0.3)
 
-HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+HF_TOKEN = os.getenv("HFACE_API_TOKEN")
 
 llm = HuggingFaceHub(
     repo_id="meta-llama/Llama-2-13b-chat-hf",   # Change to 13B if you want larger
