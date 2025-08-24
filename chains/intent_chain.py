@@ -10,7 +10,7 @@ from langchain_community.llms import HuggingFaceHub
 
 load_dotenv()
 
-HF_TOKEN = os.getenv("HFACE_API_TOKEN")
+HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 #llm = ChatOllama(model="llama3.2", temperature=0)
 
