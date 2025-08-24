@@ -1,5 +1,6 @@
 # chains/explainability_chain.py
-
+import os
+from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_community.chat_models import ChatOllama
@@ -7,6 +8,8 @@ from langchain_community.llms import HuggingFaceHub
 
 # Initialize local LLM via Ollama (e.g., llama3)
 #llm = ChatOllama(model="llama3.2", temperature=0)
+
+load_dotenv()
 
 HF_TOKEN = os.getenv("HFACE_API_TOKEN")
 

@@ -1,8 +1,11 @@
+import os
+from dotenv import load_dotenv
 from langchain.chains import RetrievalQA
 from utils.load_vectorstore import get_pinecone_retriever
 from langchain_ollama import OllamaLLM, ChatOllama
 from langchain_community.llms import HuggingFaceHub
 
+load_dotenv()
 HF_TOKEN = os.getenv("HFACE_API_TOKEN")
 
 llm = HuggingFaceHub(

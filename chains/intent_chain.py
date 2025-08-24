@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import json
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
@@ -5,6 +7,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 from langchain_community.llms import HuggingFaceHub
 
+
+load_dotenv()
 
 HF_TOKEN = os.getenv("HFACE_API_TOKEN")
 
