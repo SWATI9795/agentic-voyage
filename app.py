@@ -6,8 +6,6 @@ from chains.explainability_chain import generate_explanation
 from guards.guardrails import input_guardrails, output_guardrails
 from utils.format_output import format_response
 from utils.evaluate_response import evaluate_response
-from utils.load_vectorstore import embed_pdf_to_pinecone
-
 
 # -------------------------
 # Initialize session state
@@ -145,5 +143,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-print("Loading chunks")
-embed_pdf_to_pinecone()
+#if __name__ == "__main__":
+#    from utils.load_vectorstore import embed_pdf_to_pinecone
+#    embed_pdf_to_pinecone()
